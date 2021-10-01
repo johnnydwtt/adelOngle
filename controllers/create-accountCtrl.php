@@ -96,7 +96,7 @@ $password = trim(filter_input(INPUT_POST, 'password'));
     }
 
     if($_POST['password'] != $_POST['confirmPass']){
-        $error['password'] = 'les mots de passe doivent-être identiques';
+        $error['confirmPass'] = 'les mots de passe doivent-être identiques';
     }
 }
 

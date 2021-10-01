@@ -15,8 +15,19 @@ $(window).scroll(function() {
 	}
 });
 
-let password = document.querySelector('.verif');
-let togglePassword = document.querySelector('.toggle-password');
+
+//FIN NAVBAR +++
+
+window.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth'
+  });
+  calendar.render();
+});
+
+let password = document.getElementById('verif');
+let togglePassword = document.getElementById('toggle-password');
 
 togglePassword.addEventListener("click", toggleClicked);
 
@@ -26,5 +37,17 @@ function toggleClicked() {
   } else {
     password.type = "password";
   }
-}
-//FIN NAVBAR +++
+};
+
+let passwordVerif = document.getElementById('verifPass');
+let togglePasswordVerif = document.getElementById('toggle-verifPass');
+
+togglePasswordVerif.addEventListener("click", toggleClickedverif);
+
+function toggleClickedverif() {
+  if (passwordVerif.type == "password") {
+    passwordVerif.type = "text";
+  } else {
+    passwordVerif.type = "password";
+  }
+};

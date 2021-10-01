@@ -84,8 +84,8 @@
               <div class="input-group-append">
                 <span class="input-group-text">&#x1F511;</span>
               </div>
-              <input type="password" name="password" class="verif form-control input_pass" pattern="<?=PASSWORD_REGEX?>"
-                placeholder="Mot de passe" required><span class="eyeStyle toggle-password">&#x1F441;</span>
+              <input type="password" id="verif" name="password" class="form-control input_pass" pattern="<?=PASSWORD_REGEX?>"
+                placeholder="Mot de passe" required><span id="toggle-password" class="eyeStyle">&#x1F441;</span>
                 
             </div>
             <p class="text-danger"><?=$error['password'] ?? NULL?></p>
@@ -95,8 +95,8 @@
               <div class="input-group-append">
                 <span class="input-group-text">&#x1F511;</span>
               </div>
-              <input type="password" name="confirmPass" class="verif form-control input_pass" pattern="<?=PASSWORD_REGEX?>"
-                placeholder="Confirmation du mot de passe" required><span class="eyeStyle toggle-password">&#x1F441;</span>
+              <input type="password" id="verifPass" name="confirmPass" class="form-control input_pass" pattern="<?=PASSWORD_REGEX?>"
+                placeholder="Confirmation du mot de passe" required><span id="toggle-verifPass" class="eyeStyle">&#x1F441;</span>
             </div>
             <p class="text-danger"><?=$error['confirmPass'] ?? NULL?></p>
             <!-- PASSWORD VERIF INPUT -->
