@@ -7,7 +7,7 @@
         <div class="col-lg-12 col-12 fw-bold text-center">Prénom: <span class="text-secondary"><?=$firstname?></span> </div>
         <div class="col-lg-12 col-12 fw-bold text-center">Adresse: <span class="text-secondary"><?=$adress.' , '.$city.' '.$postal?></span></div>
         <div class="col-lg-12 col-12 fw-bold text-center">Numéro de téléphone: <span class="text-secondary"><?=$phone?></span></div>
-        <div class="col-lg-12 col-12 fw-bold text-center">Email: <span class="text-secondary"><?=$mail?></span></div>
-        <div class="col-lg-12 col-12 fw-bold text-center">Mot de passe: <span type="password" class="text-secondary"><button class="shadow border btn">Modifier</button></span></div>
+        <div class="col-lg-12 col-12 fw-bold text-center">Email: <span class="text-secondary"><?=$email?></span></div>
+        <div class="col-lg-12 col-12 fw-bold text-center">Mot de passe: <span type="password" class="text-secondary"><a href="/controllers/modif-passwordCtrl.php"><button class="shadow border btn">Modifier</button></a></span></div>
     </div>
 </div>

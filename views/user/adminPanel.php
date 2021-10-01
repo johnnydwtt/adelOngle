@@ -23,7 +23,9 @@
     </section>
     <section>
         <div class="container mt-5 bg-light shadow">
-            <h2>Ma gestion du calendrier</h2>
+            <hr>
+            <h2>Ma Gestion Rendez-Vous</h2>
+            <hr>
             <div class="row justify-content-center">
                 <div class="col-8">
                     <div id="calendar">

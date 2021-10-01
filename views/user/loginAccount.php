@@ -30,7 +30,7 @@
                 Vous n'avez pas de compte ? <a href="/controllers/create-accountCtrl.php" class="ml-2">S'inscrire</a>
               </div>
               <div class="d-flex justify-content-center links">
-                <a href="#">Mot de passe oublié?</a>
+                <a href="/controllers/forgot-passwordCtrl.php">Mot de passe oublié?</a>
               </div>
             </div>
             <div class="col-lg-3 col-8 mb-3 mt-3 login_container">

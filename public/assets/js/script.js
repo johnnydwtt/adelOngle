@@ -17,14 +17,22 @@ $(window).scroll(function() {
 
 
 //FIN NAVBAR +++
-
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded',function() {
   var calendarEl = document.getElementById('calendar');
   var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth'
+    initialView: 'dayGridMonth',
+    locale: 'fr',
+    events: [{
+      title:'test',
+      start:'2021-10-01'
+    }
+    ]
   });
   calendar.render();
 });
+
+
+
 
 let password = document.getElementById('verif');
 let togglePassword = document.getElementById('toggle-password');

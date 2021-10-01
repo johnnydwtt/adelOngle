@@ -5,7 +5,6 @@ require_once(dirname(__FILE__).'/../utils/regex/regex.php');
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 $adress = trim(filter_input(INPUT_POST, 'adress', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
-$mail = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
 $phone = trim(filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING));
 $lastname = trim(filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
 $firstname = trim(filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
@@ -70,7 +69,6 @@ $password = trim(filter_input(INPUT_POST, 'password'));
     }
 
     // CONDITIONS NUMERO DE TELEPHONE
-
     $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
 
     //On verifie que ce n'est pas vide
