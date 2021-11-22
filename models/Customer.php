@@ -60,8 +60,6 @@ class Customer{
                 throw new PDOException('Problème lors de de l\'inscription');
             }
             return true;
-            var_dump($this);
-            die;
         } catch (\PDOException $ex) {
             return $ex;
         }
