@@ -32,8 +32,6 @@ window.addEventListener('DOMContentLoaded',function() {
 });
 
 
-
-
 let password = document.getElementById('verif');
 let togglePassword = document.getElementById('toggle-password');
 

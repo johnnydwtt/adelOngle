@@ -1,13 +1,31 @@
 <?php
-require_once(dirname(__FILE__).'/../utils/regex/regex.php');
+require_once(dirname(__FILE__).'/../utils/init.php');
+/*************************************/
+
+require_once(dirname(__FILE__).'/../utils/connect.php');
+// appel de mon singleton
+require_once(dirname(__FILE__).'/../utils/regex.php');
 // appel de regex
+
+/*************************************/
+
+require_once(dirname(__FILE__).'/../models/Customer.php');
+// appel de de ma class Customer
+require_once(dirname(__FILE__) . '/../class/Mail.php');
+// // appel de de ma class Mail
+
+/*************************************/
+
+// Initialisation du tableau d'erreurs
+$errorsArray = array();
+/*************************************/
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-$adress = trim(filter_input(INPUT_POST, 'adress', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
-$phone = trim(filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING));
 $lastname = trim(filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
 $firstname = trim(filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
+$adress = trim(filter_input(INPUT_POST, 'adress', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
+$phone_number = trim(filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING));
 $city = trim(filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
 $postal = trim(filter_input(INPUT_POST, 'postal', FILTER_SANITIZE_STRING));
 $password = trim(filter_input(INPUT_POST, 'password'));
@@ -22,6 +40,8 @@ $password = trim(filter_input(INPUT_POST, 'password'));
         $error['firstname'] = 'Ce champ est requis!';
     }
     // CONDITIONS PRENOM
+// ***************************************************************
+// ***************************************************************
 
     if(!empty($lastname)){
         if (!preg_match('/'. STRING_REGEX .'/',$lastname)){
@@ -31,6 +51,8 @@ $password = trim(filter_input(INPUT_POST, 'password'));
         $error['lastname'] = 'Ce champ est requis!';
     }
     // CONDITIONS NOM DE FAMILLE
+// ***************************************************************
+// ***************************************************************
 
     if(!empty($city)){
         if (!preg_match('/'. STRING_REGEX .'/',$city)){
@@ -40,7 +62,8 @@ $password = trim(filter_input(INPUT_POST, 'password'));
         $error['city'] = 'Ce champ est requis!';
     }
     // CONDITIONS VILLE
-
+// ***************************************************************
+// ***************************************************************
 
     if(!empty($adress)){
         if (!preg_match('/'. ADRESS_REGEX .'/',$adress)){
@@ -50,6 +73,8 @@ $password = trim(filter_input(INPUT_POST, 'password'));
         $error['adress'] = 'Ce champ est requis!';
     }
     // CONDITIONS ADRESSE
+// ***************************************************************
+// ***************************************************************
 
     if(!empty($postal)){
         if (!preg_match('/'. POSTAL_REGEX .'/',$postal)){
@@ -60,21 +85,26 @@ $password = trim(filter_input(INPUT_POST, 'password'));
     }
     // CONDITIONS CODE POSTAL
 
-    if(!empty($phone)){
-        if (!preg_match('/'. PHONE_REGEX .'/',$phone)){
+// ***************************************************************
+// ***************************************************************
+
+    if(!empty($phone_number)){
+        if (!preg_match('/'. PHONE_REGEX .'/',$phone_number)){
             $error['phone'] = 'Saisir un Numéro valide!';
         }
     } else { 
         $error['phone'] = 'Ce champ est requis!';
     }
+// ***************************************************************
+// ***************************************************************
 
     // CONDITIONS NUMERO DE TELEPHONE
-    $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
+    $mail = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
 
     //On verifie que ce n'est pas vide
-    if(!empty($email)){
+    if(!empty($mail)){
         // On test la valeur
-        $testmail = filter_var($email, FILTER_VALIDATE_EMAIL);
+        $testmail = filter_var($mail, FILTER_VALIDATE_EMAIL);
 
         if(!$testmail){
             $error['email'] = "Le mail n'est pas valide ";
@@ -84,18 +114,47 @@ $password = trim(filter_input(INPUT_POST, 'password'));
         }
 
     // CONDITIONS EMAIL
+// ***************************************************************
+// ***************************************************************
 
-    if (!empty($password)){
-        if (!preg_match('/'. PASSWORD_REGEX .'/',$password)){
-            $error['password'] = 'Mot de passe non valide! il faut moins 8 caractères , 1 majuscule , 1 chiffre et 1 caractère spécicial';
+    // PASSWORD
+    $password = $_POST['password'];
+    $confirmPass = $_POST['confirmPass'];
+
+    if($password !== $confirmPass){
+        $errorsArray['password_error'] = 'Les mots de passe ne correspondent pas';
+    } else {
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+    }
+
+// ***************************************************************
+// ***************************************************************
+
+    if(empty($errorsArray)){
+        $pdo = Database::getInstance();
+        $customer = new Customer($lastname,$firstname,$adress,$mail,$phone_number,$passwordHash);
+        $response = $customer->create();
+        $id = $pdo->lastInsertId();
+        $token = $customer->ValidatedToken();
+
+        if($response === true){
+
+            $to = $mail;
+            $from = SENDER_EMAIL;
+            $subject = 'Je valide mon inscription - AdelOngle';
+            $fromName = FROM_NAME;
+            $toName = $lastname;
+
+            $link = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/controllers/validAccountCtrl.php?id='.$id.'&token='.$token;
+            $message = "Bonjour à vous $firstname $lastname,<br>Merci! Veuillez confirmer en <a href=\"$link\">cliquant ici</a>";
+
+            $mail = new Mail($message,$to,$from,$subject,$fromName,$toName);
+            $mail->send();
+            
         }
-    } else { 
-        $error['password'] = 'Ce champ est requis!';
+
     }
 
-    if($_POST['password'] != $_POST['confirmPass']){
-        $error['confirmPass'] = 'les mots de passe doivent-être identiques';
-    }
 }
 
 // CONDITIONS MOT DE PASSE
@@ -113,9 +172,5 @@ $metaDesc='Vos ongles n\'attendent plus que votre inscription';
 $specificCss='/nav.css';
 
 include(dirname(__FILE__).'/../views/template/header.php');
-if (!empty($error) || $_SERVER['REQUEST_METHOD'] !='POST' ) {
-    include(dirname(__FILE__).'../../views/user/createAccount.php');
-}else{
-    include(dirname(__FILE__).'/accountCtrl.php');
-}
+include(dirname(__FILE__).'/../views/user/createAccount.php');
 include(dirname(__FILE__).'/../views/template/footer.php');

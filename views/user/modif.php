@@ -1,12 +1,10 @@
 <main>
-  <section>
+    <section>
     <form action="<?=htmlspecialChars($_SERVER['PHP_SELF'])?>" method="post">
       <div class="container">
         <div class="row justify-content-center ">
-          <h1>Création de mon compte</h1>
+          <h1>Modification de mes information</h1>
           <div class="col-lg-6 col-12">
-            <p class="bg-light rounded shadow fs-4 mt-4">Informations personnelles</p>
-            
             <div class="col input-group mb-3">
               <div class="input-group-append">
                 <span class="input-group-text">&#x1F464;</span>
@@ -70,7 +68,6 @@
           </div>
 
           <div class="col-lg-6 col-12">
-            <p class="bg-light rounded shadow fs-4 mt-4">Informations de connexion</p>
             <div class="col input-group mb-3">
               <div class="input-group-append">
                 <span class="input-group-text">&#x1F464;</span>
@@ -103,22 +100,12 @@
             <!-- PASSWORD VERIF INPUT -->
           </div>
 
-          <div class="form-group">
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="customControlInline">
-              <label class="custom-control-label" for="customControlInline">j'ai lu et j'accepte les conditions
-                générales d'utilisation</label>
-            </div>
-          </div>
-
-
           <div class="col-lg-6 col-8 mb-3 mt-3 login_container">
-          <input type="submit" value="Inscription" class="btn login_btn">
+          <input type="submit" value="Modification" class="btn login_btn">
           </div>
 
         </div>
       </div>
     </form>
-  </section>
+    </section>
 </main>
-<!-- **************************************** -->

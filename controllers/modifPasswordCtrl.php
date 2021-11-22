@@ -1,9 +1,10 @@
 <?php
+require_once(dirname(__FILE__).'/../utils/init.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     if (!empty($newpassword)){
-        if (!preg_match('/'. PASSWORD_REGEX .'/',$newpassword)){
+        if (!$newpassword){
             $error['newpassword'] = 'Mot de passe non valide!';
         }
     } else { 
@@ -11,7 +12,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
 
     if (!empty($oldpassword)){
-        if (!preg_match('/'. PASSWORD_REGEX .'/',$oldpassword)){
+        if ($oldpassword){
             $error['oldpassword'] = 'Mot de passe non valide!';
         }
     } else { 
@@ -27,5 +28,5 @@ $specificCss='/nav.css';
 
 
 include(dirname(__FILE__).'/../views/template/header.php');
-include(dirname(__FILE__).'../../views/user/modif-password.php');
+include(dirname(__FILE__).'/../views/user/modif-password.php');
 include(dirname(__FILE__).'/../views/template/footer.php');

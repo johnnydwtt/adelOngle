@@ -1,4 +1,5 @@
 <?php
+
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
 
@@ -23,5 +24,5 @@ $specificCss='/nav.css';
 
 
 include(dirname(__FILE__).'/../views/template/header.php');
-include(dirname(__FILE__).'../../views/user/forgotPassword.php');
+include(dirname(__FILE__).'/../views/user/forgotPassword.php');
 include(dirname(__FILE__).'/../views/template/footer.php');

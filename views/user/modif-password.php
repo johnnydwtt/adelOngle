@@ -11,7 +11,7 @@
                             <span class="input-group-text">&#x1F511;</span>
                         </div>
                         <input type="password" id="verif" name="oldpassword" class="form-control input_pass"
-                            pattern="<?=PASSWORD_REGEX?>" placeholder="Ancien mot de passe" required><span id="toggle-password"
+                            placeholder="Ancien mot de passe" required><span id="toggle-password"
                             class="eyeStyle">&#x1F441;</span>
 
                     </div>
@@ -25,7 +25,7 @@
                             <span class="input-group-text">&#x1F511;</span>
                         </div>
                         <input type="password" id="verifPass" name="newpassword" class="form-control input_pass"
-                            pattern="<?=PASSWORD_REGEX?>" placeholder="Nouveau mot de passe" required><span
+                            placeholder="Nouveau mot de passe" required><span
                             id="toggle-verifPass" class="eyeStyle">&#x1F441;</span>
                     </div>
                     <p class="text-danger"><?=$error['confirmPass'] ?? NULL?></p>

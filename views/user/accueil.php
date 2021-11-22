@@ -12,9 +12,11 @@
             </div>
             <div class="row text-center justify-content-center mt-lg-4 mt-3">
                 <div type="button" class="col-lg-4 col-12 hoverButton">
-                    <div id="booking">
-                        Reservation
-                    </div>
+                    <a href="/controllers/reservationCtrl.php">
+                        <div id="booking">
+                            Reservation
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -26,7 +28,7 @@
     <section>
         <div class="container mt-4">
             <div class="row text-center">
-                <div class="col">PRESTATION PRIX</div>
+                <div id="prestation" class="col">PRESTATION PRIX</div>
             </div>
         </div>
     </section>
@@ -36,7 +38,7 @@
     <section>
         <div class="container mt-4 mb-4">
             <div class="row text-center mb-3">
-                <div class="col">PHOTOS</div>
+                <div id="photo" class="col">PHOTOS</div>
             </div>
             <div class="row justify-content-center text-center">
                 <div class="col-12 col-lg-4 col-md-4">
