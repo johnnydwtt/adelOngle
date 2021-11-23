@@ -17,7 +17,7 @@ require_once(dirname(__FILE__) . '/../class/Mail.php');
 /*************************************/
 
 // Initialisation du tableau d'erreurs
-$errorsArray = array();
+$error = array();
 /*************************************/
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -122,7 +122,7 @@ $password = trim(filter_input(INPUT_POST, 'password'));
     $confirmPass = $_POST['confirmPass'];
 
     if($password !== $confirmPass){
-        $errorsArray['password_error'] = 'Les mots de passe ne correspondent pas';
+        $error['password_error'] = 'Les mots de passe ne correspondent pas';
     } else {
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
     }
@@ -130,12 +130,15 @@ $password = trim(filter_input(INPUT_POST, 'password'));
 // ***************************************************************
 // ***************************************************************
 
-    if(empty($errorsArray)){
+    if(empty($error)){
         $pdo = Database::getInstance();
         $customer = new Customer($lastname,$firstname,$adress,$mail,$phone_number,$passwordHash);
         $response = $customer->create();
         $id = $pdo->lastInsertId();
         $token = $customer->ValidatedToken();
+
+        $messageError = ERR_EMAIL_EXIST;
+    }
 
         if($response === true){
 
@@ -150,12 +153,9 @@ $password = trim(filter_input(INPUT_POST, 'password'));
 
             $mail = new Mail($message,$to,$from,$subject,$fromName,$toName);
             $mail->send();
+        }
             
         }
-
-    }
-
-}
 
 // CONDITIONS MOT DE PASSE
 

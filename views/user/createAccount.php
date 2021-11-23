@@ -2,11 +2,9 @@
   <section>
     <form action="<?=htmlspecialChars($_SERVER['PHP_SELF'])?>" method="post">
       <div class="container">
-        <div class="row justify-content-center ">
-          <h1>Création de mon compte</h1>
+        <div class="row justify-content-center">
           <div class="col-lg-6 col-12">
             <p class="bg-light rounded shadow fs-4 mt-4">Informations personnelles</p>
-            
             <div class="col input-group mb-3">
               <div class="input-group-append">
                 <span class="input-group-text">&#x1F464;</span>
@@ -14,7 +12,7 @@
               <input type="text" name="lastname" value="<?=htmlentities($lastname ?? '')?>" class="form-control input_pass" pattern="<?=STRING_REGEX?>"
                 placeholder="Nom" required>
             </div>
-            <p class="text-danger"><?=$error['lastname'] ?? NULL?></p>
+            <div class="text-danger fw-bold my-2"><?=$error['lastname'] ?? NULL?></div>
             <!-- LASTNAME INPUT -->
 
             <div class="input-group mb-2">
@@ -24,61 +22,62 @@
               <input type="text" name="firstname" value="<?=htmlentities($firstname ?? '')?>" class="form-control input_pass" pattern="<?=STRING_REGEX?>"
                 placeholder="Prénom" required>
             </div>
-            <p class="text-danger"><?=$error['firstname'] ?? NULL?></p>
+            <div class="text-danger fw-bold my-2"><?=$error['firstname'] ?? NULL?></div>
             <!-- FIRSTNAME INPUT -->
 
             <div class="input-group mb-2">
               <div class="input-group-append">
-                <span class="input-group-text">&#x1F464;</span>
+                <span class="input-group-text">&#127968;</span>
               </div>
               <input type="text" name="adress" value="<?=htmlentities($adress ?? '')?>" class="form-control input_pass" pattern="<?=ADRESS_REGEX?>"
                 placeholder="Adresse" required>
             </div>
-            <p class="text-danger"><?=$error['adress'] ?? NULL?></p>
+            <div class="text-danger fw-bold my-2"><?=$error['adress'] ?? NULL?></div>
             <!-- ADRESSE VERIF INPUT -->
 
             <div class="input-group mb-2">
               <div class="input-group-append">
-                <span class="input-group-text">&#x1F464;</span>
+                <span class="input-group-text">&#128238;</span>
               </div>
               <input type="text" name="postal" value="<?=htmlentities($postal ?? '')?>" class="form-control input_pass" pattern="<?=POSTAL_REGEX?>"
                 placeholder="Code Postal" required>
             </div>
-            <p class="text-danger"><?=$error['postal'] ?? NULL?></p>
+            <div class="text-danger fw-bold my-2"><?=$error['postal'] ?? NULL?></div>
             <!-- CODE POSTAL INPUT -->
 
             <div class="input-group mb-2">
               <div class="input-group-append">
-                <span class="input-group-text">&#x1F464;</span>
+                <span class="input-group-text">	&#128205;</span>
               </div>
               <input type="text" name="city" value="<?=htmlentities($city ?? '')?>" class="form-control input_pass" pattern="<?=STRING_REGEX?>"
                 placeholder="Ville" required>
             </div>
-            <p class="text-danger"><?=$error['city'] ?? NULL?></p>
+            <div class="text-danger fw-bold my-2"><?=$error['city'] ?? NULL?></div>
             <!-- CITY INPUT -->
 
 
             <div class="input-group mb-2 col-lg-12">
               <div class="input-group-append">
-                <span class="input-group-text">&#x1F464;</span>
+                <span class="input-group-text">&#9742;</span>
               </div>
               <input type="number" name="phone" value="<?=htmlentities($phone_number ?? '')?>" class="form-control input_pass" pattern="<?=PHONE_REGEX?>"
                 placeholder="Téléphone" required>
             </div>
-            <p class="text-danger"><?=$error['phone'] ?? NULL?></p>
+            <div class="text-danger fw-bold my-2"><?=$error['phone'] ?? NULL?></div>
             <!-- PHONE INPUT -->
           </div>
 
           <div class="col-lg-6 col-12">
             <p class="bg-light rounded shadow fs-4 mt-4">Informations de connexion</p>
+            <div class="text-danger fw-bold my-2"><?=htmlentities($messageError ?? '')?></div>
             <div class="col input-group mb-3">
               <div class="input-group-append">
-                <span class="input-group-text">&#x1F464;</span>
+                <span class="input-group-text">&#128231;</span>
               </div>
-              <input type="mail" name="email" value="<?=htmlentities($mail ?? '')?>" class="form-control input_user" pattern="<?=MAIL_REGEX?>"
+              <input type="mail" name="email" class="form-control input_user" pattern="<?=MAIL_REGEX?>"
                 placeholder="Email" required>
             </div>
-            <p class="text-danger"><?=$error['email'] ?? NULL?></p>
+            <div class="text-danger fw-bold my-2"><?=$error['email'] ?? NULL?></div>
             <!-- USERNAME INPUT -->
 
             <div class="input-group mb-2">
@@ -89,7 +88,7 @@
                 placeholder="Mot de passe" required><span id="toggle-password" class="eyeStyle">&#x1F441;</span>
                 
             </div>
-            <p class="text-danger"><?=$error['password'] ?? NULL?></p>
+            <div class="text-danger fw-bold my-2"><?=$error['password'] ?? NULL?></div>
             <!-- PASSWORD INPUT -->
 
             <div class="input-group mb-2">
@@ -99,13 +98,13 @@
               <input type="password" id="verifPass" name="confirmPass" class="form-control input_pass"
                 placeholder="Confirmation du mot de passe" required><span id="toggle-verifPass" class="eyeStyle">&#x1F441;</span>
             </div>
-            <p class="text-danger"><?=$error['password_error'] ?? NULL?></p>
+            <div class="text-danger fw-bold my-2"><?=$error['password_error'] ?? NULL?></div>
             <!-- PASSWORD VERIF INPUT -->
           </div>
 
           <div class="form-group">
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="customControlInline">
+              <input type="checkbox" class="custom-control-input" id="customControlInline" required>
               <label class="custom-control-label" for="customControlInline">j'ai lu et j'accepte les conditions
                 générales d'utilisation</label>
             </div>

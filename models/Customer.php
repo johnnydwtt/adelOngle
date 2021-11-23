@@ -48,22 +48,52 @@ class Customer{
         VALUES (:firstname, :lastname, :mail, :phone_number, :adress, :password, :validated_token);';
     
         try {
-            $sth = $this->_pdo->prepare($sql);
-            $sth->bindValue(':lastname', $this->_lastname);
-            $sth->bindValue(':firstname', $this->_firstname);
-            $sth->bindValue(':adress', $this->_adress);
-            $sth->bindValue(':mail', $this->_mail);
-            $sth->bindValue(':phone_number', $this->_phone_number);
-            $sth->bindValue(':password', $this->_password);
-            $sth->bindValue(':validated_token', $this->_validated_token);
-            if(!$sth->execute()){
-                throw new PDOException('Problème lors de de l\'inscription');
+            if(!$this->isExist($this->_mail)){
+                $sth = $this->_pdo->prepare($sql);
+                $sth->bindValue(':lastname', $this->_lastname);
+                $sth->bindValue(':firstname', $this->_firstname);
+                $sth->bindValue(':adress', $this->_adress);
+                $sth->bindValue(':mail', $this->_mail);
+                $sth->bindValue(':phone_number', $this->_phone_number);
+                $sth->bindValue(':password', $this->_password);
+                $sth->bindValue(':validated_token', $this->_validated_token);
+
+                $result = $sth->execute();
+
+                if($result === false){
+                    throw new PDOException('Problème d\'inscription');
+                } else {
+                    return true;
+                }
+
+            } else {
+                throw new PDOException(ERR_EMAIL_EXIST);
             }
-            return true;
+            
         } catch (\PDOException $ex) {
             return $ex;
         }
     
+    }
+
+    public static function isExist($mail){
+        try{
+            $pdo = Database::getInstance();
+            $sql = 'SELECT `mail` FROM `customer` 
+                    WHERE `mail` = :mail;';
+
+            $sth = $pdo->prepare($sql);
+            $sth->bindValue(':mail',$mail,PDO::PARAM_STR);
+            $sth->execute();
+            $result = $sth->fetchColumn();
+            if($result){
+                return true;
+            }
+        }
+        catch(PDOException $ex){
+            throw new PDOException($ex);
+        }
+
     }
 
     public function ValidatedToken(){
@@ -82,7 +112,7 @@ class Customer{
             }
             return $sth->fetch();
         } catch (\PDOException $ex) {
-            return $ex;
+            
         }
 
     }
@@ -100,7 +130,7 @@ class Customer{
                 return $sth->rowCount();
             }
         } catch (\PDOException $ex) {
-            return $ex;
+            
         }
 
     }

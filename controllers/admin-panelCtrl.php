@@ -44,10 +44,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $time_slot = new Time_slot($datetime);
         $response = $time_slot->create();
 
-        if($response === true){
-            $message = 'Rendez-vous bien enregister &#9989;';
-        } else {
+        if(!$response){
             $message = 'Problème d\'enregistrement 	&#10060;';
+        } else {
+            $message = 'Rendez-vous bien enregister &#9989;';
         }
 
     };
@@ -58,6 +58,13 @@ $title='Adel\'Ongle - Panel rendez-vous';
 // meta description
 $specificCss='/nav.css';
 
-include(dirname(__FILE__).'/../views/template/header.php');
-include(dirname(__FILE__).'/../views/user/adminPanel.php');
-include(dirname(__FILE__).'/../views/template/footer.php');
+if(isset($_SESSION['customer'])){
+    include(dirname(__FILE__).'/../views/template/header.php');
+    include(dirname(__FILE__).'/../views/user/adminPanel.php');
+    include(dirname(__FILE__).'/../views/template/footer.php');
+
+
+} else {
+    header('location: /controllers/indexCtrl.php');
+}
+

@@ -7,7 +7,15 @@ $metaDesc='Mon espace client - Adel\'Ongle';
 // meta description
 $specificCss='/nav.css';
 
-include(dirname(__FILE__).'/../views/template/header.php');
-include(dirname(__FILE__).'/../views/user/account.php');
-include(dirname(__FILE__).'/../views/template/footer.php');
+if(isset($_SESSION['customer'])){
+    include(dirname(__FILE__).'/../views/template/header.php');
+    include(dirname(__FILE__).'/../views/user/account.php');
+    include(dirname(__FILE__).'/../views/template/footer.php');
+
+
+} else {
+    header('location: /controllers/indexCtrl.php');
+}
+
+
 

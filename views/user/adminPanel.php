@@ -1,7 +1,7 @@
 <main>
     <section>
     <form action="" method="post">
-    <div class="text-center my-3 fs-3"><?=$message?></div>
+    <div class="text-center my-3 fs-4"><?=htmlentities($message ?? '')?></div>
         <div class="container bg-light shadow">
             <h1 class="mb-4">Ajouter un rendez-vous</h1>
             <div class="row justify-content-center">
