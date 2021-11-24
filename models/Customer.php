@@ -1,5 +1,4 @@
 <?php
-
 require_once(dirname(__FILE__).'/../utils/connect.php');
 
 class Customer{
@@ -44,8 +43,8 @@ class Customer{
 
     public function create(){
         
-        $sql = 'INSERT INTO `customer` (`firstname`, `lastname`, `mail`, `phone_number`, `adress`, `password`, `validated_token`)
-        VALUES (:firstname, :lastname, :mail, :phone_number, :adress, :password, :validated_token);';
+        $sql = 'INSERT INTO `customer` (`firstname`, `lastname`, `mail`, `phone_number`, `adress`, `password`, `validated_token`,`role_id`)
+        VALUES (:firstname, :lastname, :mail, :phone_number, :adress, :password, :validated_token,2);';
     
         try {
             if(!$this->isExist($this->_mail)){
@@ -119,7 +118,7 @@ class Customer{
 
     public static function deleteToken($customer_id){
         $sql = 'UPDATE `customer` SET `validated_token`= null
-                WHERE `customer_id` = :customer_id';
+                WHERE `customer_id` = :customer_id;';
         try {
             $pdo = Database::getInstance();
             $sth = $pdo->prepare($sql);
@@ -188,6 +187,185 @@ class Customer{
         } catch (\PDOException $ex) {
             return $ex;
         }
+    }
+
+    // *************************************
+    // ** AFFICHER / MODIFIER / SUPPRIMER **
+    // *************************************
+
+    public static function getAll($search='', $limit=null, $offset=0){
+        
+        try{
+            $pdo = Database::getInstance();
+
+             // Si la limite n'est pas définie, il faut tout lister
+            if(is_null($limit)){
+                $sql = 'SELECT * FROM `customer` 
+                WHERE `lastname` LIKE :search 
+                OR `firstname` LIKE :search;';
+            } else {
+                $sql = 'SELECT * FROM `customer` 
+                WHERE `lastname` LIKE :search 
+                OR `firstname` LIKE :search 
+                LIMIT :limit OFFSET :offset;';
+            }
+
+            $sth = $pdo->prepare($sql);
+            $sth->bindValue(':search','%'.$search.'%',PDO::PARAM_STR);
+            
+            if(!is_null($limit)){
+                $sth->bindValue(':offset', $offset, PDO::PARAM_INT);
+                $sth->bindValue(':limit', $limit, PDO::PARAM_INT);
+            }
+            
+            $result = $sth->execute();
+
+            if($result === false){
+                throw new PDOException(ERR_PDO);
+            } else {
+                return($sth->fetchAll());
+            }
+            
+        }
+        catch(PDOException $ex){
+            return $ex;
+        }
+
+    }
+
+    public static function read($customer_id){
+
+        try {
+            $pdo = Database::getInstance();
+            $sql = 'SELECT * FROM `customer` WHERE `customer_id` = :customer_id;';
+
+            $sth = $pdo->prepare($sql);
+            $sth->bindValue(':customer_id', $customer_id, PDO::PARAM_INT);
+
+            $result = $sth->execute();
+            if($result){
+                $customer = $sth->fetch();
+                if($customer===false){
+                    //Patient non trouvé
+                    throw new PDOException('Client non trouvé');
+                } else {
+                    return $customer;
+                }
+            } else {
+                //Erreur générale
+                throw new PDOException('Erreur d\'exécution de la requête');
+            }
+
+        } catch (\PDOException $ex) {
+            return $ex;
+        }
+
+
+    }
+
+    /**
+     * Méthode qui permet de mettre à jour un patient
+     * 
+     * @return boolean
+     */
+    public function update($customer_id){
+        try{
+            // On récupère le patient
+            $response = $this::get($customer_id);
+            
+            //Si la réponse est une erreur on sort via le catch
+            if($response instanceof PDOException){
+                throw new PDOException($response->getMessage());
+            }
+
+            // Si le mail n'existe pas en base ou que ça n'est pas déjà le mail du patient que l'on modifie
+            // on a le droit de faire les modifs
+            if(!$this->isExist($this->_mail) || $this->_mail==$response->mail){
+                $sql = 'UPDATE `customer` SET `firstname` = :firstname, `lastname` = :lastname, `mail` = :mail, `phone_number` = :phone_number, `adress` = :adress
+                        WHERE `customer_id` = :customer_id;';
+
+                $sth = $this->_pdo->prepare($sql);
+                $sth->bindValue(':firstname',$this->_firstname,PDO::PARAM_STR);
+                $sth->bindValue(':lastname',$this->_lastname,PDO::PARAM_STR);
+                $sth->bindValue(':mail',$this->_mail,PDO::PARAM_STR);
+                $sth->bindValue(':phone_number',$this->_phone_number,PDO::PARAM_STR);
+                $sth->bindValue(':adress',$this->_adress,PDO::PARAM_STR);
+                $sth->bindValue(':customer_id',$customer_id,PDO::PARAM_INT);
+                $result = $sth->execute();
+
+                if($result === false){
+                    throw new PDOException(ERR_UPDATE_CLIENT_NOTOK);
+                }
+                
+            } else {
+                throw new PDOException(ERR_CLIENTEXIST);
+            }
+        } catch(PDOException $ex){
+            return $ex;
+        }
+    }
+
+
+    /**
+     * Méthode qui permet de supprimer un patient
+     * 
+     * @return boolean
+     */
+    public static function delete($customer_id){
+
+        try{
+            $pdo = Database::getInstance();
+            $sql = 'DELETE FROM `customer`
+                    WHERE `customer_id` = :customer_id;';
+
+            $sth = $pdo->prepare($sql);
+            $sth->bindValue(':customer_id',$customer_id,PDO::PARAM_INT);
+            
+            $sth->execute();
+            if($sth === false){
+                throw new PDOException(ERR_PDO);
+            } else {
+                if($sth->rowCount()==0)
+                    throw new PDOException(ERR_DELETE_CLIENT_NOTOK);
+                else
+                    throw new PDOException(MSG_DELETE_CLIENT_OK);
+            }
+        }
+        catch(PDOException $ex){
+            return $ex;
+        }
+
+    }
+
+    public static function count($s){
+
+        try {
+
+            $pdo = Database::getInstance();
+
+            $sql = 'SELECT COUNT(`customer_id`) as `nbPatients` FROM `customer`
+                    WHERE `lastname` LIKE :search 
+                    OR `firstname` LIKE :search;';
+
+            $sth = $pdo->prepare($sql);
+            $sth->bindValue(':search','%'.$s.'%',PDO::PARAM_STR);
+            $result = $sth->execute();
+            if($result === false){
+                throw new PDOException(ERR_PDO);
+            } else {
+                $count = $sth->fetchColumn();
+                if($count === false){
+                    return 0;
+                } else {
+                    return $count;
+                }
+            }
+        
+        } catch (\PDOException $ex) {
+            return 0;
+        }
+        
+
     }
 
 

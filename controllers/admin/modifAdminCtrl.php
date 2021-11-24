@@ -1,15 +1,15 @@
 <?php
-require_once(dirname(__FILE__).'/../utils/init.php');
+require_once(dirname(__FILE__).'/../../utils/init.php');
 /*************************************/
 
-require_once(dirname(__FILE__).'/../utils/connect.php');
+require_once(dirname(__FILE__).'/../../utils/connect.php');
 // appel de mon singleton
-require_once(dirname(__FILE__).'/../utils/regex.php');
+require_once(dirname(__FILE__).'/../../utils/regex.php');
 // appel de regex
 
 /*************************************/
 
-require_once(dirname(__FILE__).'/../models/Customer.php');
+require_once(dirname(__FILE__).'/../../models/Customer.php');
 // appel de de ma class Customer
 
 /*************************************/
@@ -17,6 +17,11 @@ require_once(dirname(__FILE__).'/../models/Customer.php');
 // Initialisation du tableau d'erreurs
 $error = array();
 /*************************************/
+
+$customer_id = trim(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
+
+$read = Customer::read($customer_id);
+
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -91,9 +96,14 @@ $phone_number = trim(filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING));
 // ***************************************************************
 // ***************************************************************
 
+    
+    
+
     if(empty($error) ){    
         $customer = new Customer($lastname,$firstname,$mail,$phone_number,$adress);
         $response = $customer->update($customer_id);
+        
+
         // Si $response appartient à la classe PDOException (Si une exception est retournée),
         // on stocke un message d'erreur à afficher dans la vue
         if($response instanceof PDOException){
@@ -102,19 +112,24 @@ $phone_number = trim(filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING));
             $message = MSG_UPDATE_CLIENT_OK;
         }
     
-    
 }
 }
 
 
-$title='Adel\'Ongle - Modification du profil';
+$title='Adel\'Ongle - Modification d\'un profil';
 // titre de page
 $metaDesc='Je modifie mon profil - Adel\'Ongle';
 // meta description
 $specificCss='/nav.css';
 
-include(dirname(__FILE__) . '/../views/template/header.php');
+if($_SESSION['customer']->role_id == 1){
 
-include(dirname(__FILE__) . '/../views/user/modif.php');
+include(dirname(__FILE__) . '/../../views/template/header.php');
+include(dirname(__FILE__) . '/../../views/user/modifAdmin.php');
+include(dirname(__FILE__) . '/../../views/template/footer.php');
 
-include(dirname(__FILE__) . '/../views/template/footer.php');
+}else {
+    header('location: /../controllers/indexCtrl.php');
+}
+
+/*************************************************************/

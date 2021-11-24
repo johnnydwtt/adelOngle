@@ -54,17 +54,6 @@ $password = trim(filter_input(INPUT_POST, 'password'));
 // ***************************************************************
 // ***************************************************************
 
-    if(!empty($city)){
-        if (!preg_match('/'. STRING_REGEX .'/',$city)){
-            $error['city'] = 'Saisir une ville valide!';
-        }
-    } else { 
-        $error['city'] = 'Ce champ est requis!';
-    }
-    // CONDITIONS VILLE
-// ***************************************************************
-// ***************************************************************
-
     if(!empty($adress)){
         if (!preg_match('/'. ADRESS_REGEX .'/',$adress)){
             $error['adress'] = 'Saisir une Adresse valide!';
@@ -73,17 +62,6 @@ $password = trim(filter_input(INPUT_POST, 'password'));
         $error['adress'] = 'Ce champ est requis!';
     }
     // CONDITIONS ADRESSE
-// ***************************************************************
-// ***************************************************************
-
-    if(!empty($postal)){
-        if (!preg_match('/'. POSTAL_REGEX .'/',$postal)){
-            $error['postal'] = 'Saisir un code postal valide!';
-        }
-    } else { 
-        $error['postal'] = 'Ce champ est requis!';
-    }
-    // CONDITIONS CODE POSTAL
 
 // ***************************************************************
 // ***************************************************************

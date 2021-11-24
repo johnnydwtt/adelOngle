@@ -1,11 +1,11 @@
 <?php
-require_once(dirname(__FILE__).'/../utils/regex.php');
-require_once(dirname(__FILE__).'/../utils/connect.php');
-require_once(dirname(__FILE__).'/../models/Customer.php');
-require_once(dirname(__FILE__).'/../models/Appointment.php');
-require_once(dirname(__FILE__).'/../models/Time_slot.php');
+require_once(dirname(__FILE__).'/../../utils/regex.php');
+require_once(dirname(__FILE__).'/../../utils/connect.php');
+require_once(dirname(__FILE__).'/../../models/Customer.php');
+require_once(dirname(__FILE__).'/../../models/Appointment.php');
+require_once(dirname(__FILE__).'/../../models/Time_slot.php');
 // appel de regex
-require_once(dirname(__FILE__).'/../utils/init.php');
+require_once(dirname(__FILE__).'/../../utils/init.php');
 
 // Initialisation du tableau d'erreurs
 $errorsArray = array();
@@ -50,7 +50,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $message = 'Rendez-vous bien enregister &#9989;';
         }
 
-    };
+    }
 }
 
 // *****************************
@@ -58,10 +58,10 @@ $title='Adel\'Ongle - Panel rendez-vous';
 // meta description
 $specificCss='/nav.css';
 
-if(isset($_SESSION['customer'])){
-    include(dirname(__FILE__).'/../views/template/header.php');
-    include(dirname(__FILE__).'/../views/user/adminPanel.php');
-    include(dirname(__FILE__).'/../views/template/footer.php');
+if($_SESSION['customer']->role_id == 1){
+    include(dirname(__FILE__).'/../../views/template/header.php');
+    include(dirname(__FILE__).'/../../views/user/adminPanel.php');
+    include(dirname(__FILE__).'/../../views/template/footer.php');
 
 
 } else {

@@ -24,7 +24,7 @@
                     </div>
                         <p class="text-danger"><?=$error['time'] ?? NULL?></p>
                 </div>
-                <div class="col-lg-4 col-8 mb-3 mt-3 login_container">
+                <div class="col-lg-4 col-8 my-3 login_container">
                     <input type="submit" name="button" value="Validation" class="btn login_btn">
                 </div>
             </div>
@@ -34,12 +34,11 @@
     <section>
         <div class="container mt-5 bg-light shadow">
             <hr>
-            <h2>Ma Gestion Rendez-Vous</h2>
+            <h2>Mon menu gestion</h2>
             <hr>
             <div class="row justify-content-center">
-                <div class="col-8">
-                    <div id="calendar">
-                    </div>
+                <div class="col-3 my-3">
+                    <a href="/controllers/admin/listCustomerCtrl.php"><button class="btn login_btn">Ma liste de patient</button></a>
                 </div>
             </div>
         </div>

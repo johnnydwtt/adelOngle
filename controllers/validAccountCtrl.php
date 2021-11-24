@@ -9,6 +9,8 @@ $get_token = trim(filter_input(INPUT_GET, 'token', FILTER_SANITIZE_STRING));
 $customer = Customer::get($customer_id);
 $valid_token = $customer->validated_token;
 
+
+
 if($get_token == $valid_token){
     $response = Customer::setValidateAccount($customer_id);
     if($response === true){

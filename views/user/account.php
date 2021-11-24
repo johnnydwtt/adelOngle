@@ -1,15 +1,35 @@
 <main>
     <div class="container-fluid">
-        <div class="row justify-content-center text-center">
-            <h1 class="bg-light shadow">Mon Compte</h1>
-        </div>
-        <div class="row justify-content-lg-start text-dark">
-            <div class="col-lg-12 col-12 mt-4 fw-bold text-center">Nom:<span class="text-secondary"><?=$lastname?></span></div>
-            <div class="col-lg-12 col-12 fw-bold text-center">Prénom: <span class="text-secondary"><?=$firstname?></span> </div>
-            <div class="col-lg-12 col-12 fw-bold text-center">Adresse: <span class="text-secondary"><?=$adress.' , '.$city.' '.$postal?></span></div>
-            <div class="col-lg-12 col-12 fw-bold text-center">Numéro de téléphone: <span class="text-secondary"><?=$phone?></span></div>
-            <div class="col-lg-12 col-12 fw-bold text-center">Email: <span class="text-secondary"><?=$email?></span></div>
-            <div class="col-lg- col-12 fw-bold text-center">Mot de passe: <span type="password" class="text-secondary"><a href="/controllers/modifpasswordCtrl.php"><button class="shadow border btn">Modifier</button></a></span></div>
+        <div class="row justify-content-center text-center text-dark">
+
+            <div class="card">
+                <div class="card-header fs-2"><?=htmlentities($_SESSION['customer']->firstname)?> <?=htmlentities($_SESSION['customer']->lastname)?>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                    <span class="fw-bold">Email:</span> 
+                        <?=htmlentities($_SESSION['customer']->mail)?>
+                    </p>
+                    <p class="card-text">
+                    <span class="fw-bold">Téléphone:</span> 
+                        <?=htmlentities($_SESSION['customer']->phone_number)?>
+                    </p>
+                    <p class="card-text"> 
+                        <span class="fw-bold">Adresse:</span> 
+                        <?=htmlentities($_SESSION['customer']->adress)?> 
+                    </p>
+                    <p class="card-text"> 
+                        <span class="fw-bold">Mot de passe:</span> 
+                        ************
+                    </p>
+                    
+                    <a href="/controllers/modifCtrl.php?id=<?=htmlentities($_SESSION['customer']->customer_id)?>">
+                    <button class="w-25 btn login_btn">Modifier</button>
+                    </a>
+            
+                </div>
+                
+            </div>
         </div>
     </div>
 </main>

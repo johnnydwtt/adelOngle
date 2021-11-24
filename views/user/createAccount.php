@@ -35,26 +35,6 @@
             <div class="text-danger fw-bold my-2"><?=$error['adress'] ?? NULL?></div>
             <!-- ADRESSE VERIF INPUT -->
 
-            <div class="input-group mb-2">
-              <div class="input-group-append">
-                <span class="input-group-text">&#128238;</span>
-              </div>
-              <input type="text" name="postal" value="<?=htmlentities($postal ?? '')?>" class="form-control input_pass" pattern="<?=POSTAL_REGEX?>"
-                placeholder="Code Postal" required>
-            </div>
-            <div class="text-danger fw-bold my-2"><?=$error['postal'] ?? NULL?></div>
-            <!-- CODE POSTAL INPUT -->
-
-            <div class="input-group mb-2">
-              <div class="input-group-append">
-                <span class="input-group-text">	&#128205;</span>
-              </div>
-              <input type="text" name="city" value="<?=htmlentities($city ?? '')?>" class="form-control input_pass" pattern="<?=STRING_REGEX?>"
-                placeholder="Ville" required>
-            </div>
-            <div class="text-danger fw-bold my-2"><?=$error['city'] ?? NULL?></div>
-            <!-- CITY INPUT -->
-
 
             <div class="input-group mb-2 col-lg-12">
               <div class="input-group-append">

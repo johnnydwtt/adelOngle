@@ -3,26 +3,29 @@ require_once(dirname(__FILE__).'/../utils/init.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-    if (!empty($newpassword)){
-        if (!$newpassword){
-            $error['newpassword'] = 'Mot de passe non valide!';
-        }
-    } else { 
-        $error['password'] = 'Ce champ est requis!';
-    }
+    $oldpassword = $_SESSION['customer']->password ;
 
-    if (!empty($oldpassword)){
-        if ($oldpassword){
-            $error['oldpassword'] = 'Mot de passe non valide!';
+    if (isset($oldpassword)) {
+        $error['password_error'] = 'Votre mot de passe n\'est pas correct';
+    }else {
+
+        $newpassword = $_POST['newpassword'];
+        $newpasswordConfirm = $_POST['newpasswordConfirm'];
+
+        if($password !== $confirmPass){
+            $error['password_error'] = 'Les mots de passe ne correspondent pas';
+        } else {
+            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
         }
-    } else { 
-        $error['password'] = 'Ce champ est requis!';
+
     }
+    
+        
 }
 
 $title='Adel\'Ongle - modification du mot de passe';
 // titre de page
-$metaDesc='je veux changer de mot de passe , eh oui nous sommes obligé défois';
+$metaDesc='AdelOngle - J\'ai oublié mon mot de passe , il faut que je le change';
 // meta description
 $specificCss='/nav.css';
 

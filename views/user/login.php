@@ -4,9 +4,6 @@
       <div class="container">
         <div class="row justify-content-center">
           <h1 class="bg-light rounded shadow mb-5">Espace Client</h1>
-
-          
-
             <div class="col-lg-5 col-12">
               <div class="input-group mb-2">
                 <div class="input-group-append">
@@ -41,8 +38,8 @@
               <input type="submit" value="Connexion" class="btn login_btn">
             </div>
           
-        </div>
-      </div>
+        </span>
+      </span>
   </form>
   </section>
   <!-- **************************************** -->

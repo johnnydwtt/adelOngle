@@ -36,14 +36,29 @@
                                     <a class="dropdown-item" href="/controllers/loginCtrl.php">Login</a>
                                     <a class="dropdown-item" href="/controllers/create-accountCtrl.php">Crée un compte</a>
                                 </div>
-                            <?php } else { ?>
+                            <?php 
+                                }elseif($_SESSION['customer']->role_id == 1){ 
+                            ?>
+
                                 <a class="col-lg-3 dropdown-toggle col-12 fs-2" role="button" data-bs-toggle="dropdown" aria-expanded="true">&#128133;</a>
                                 <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="/controllers/admin/admin-panelCtrl.php">Admin</a>
                                     <a class="dropdown-item" href="/controllers/accountCtrl.php">Profil</a>
                                     <a class="dropdown-item" href="/controllers/disconnectCtrl.php">Déconnexion</a>
                                 </div>
-                            <?php } ?>
-                        </li>
+
+                            <?php 
+                                }elseif($_SESSION['customer']->role_id == 2){ 
+                            ?>
+                        
+                                <a class="col-lg-3 dropdown-toggle col-12 fs-2" role="button" data-bs-toggle="dropdown" aria-expanded="true">&#128133;</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="/controllers/accountCtrl.php?id=<?=$response->customer_id?>">Profil</a>
+                                    <a class="dropdown-item" href="/controllers/disconnectCtrl.php">Déconnexion</a>
+                                </div>
+                            <?php } ?> 
+                        </li> 
+                            
                     </div>
                 </ul>
             </div>

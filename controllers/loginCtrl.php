@@ -1,6 +1,6 @@
 <?php
 require_once(dirname(__FILE__) . '/../utils/init.php');
-
+require_once(dirname(__FILE__).'/../utils/connect.php');
 require_once(dirname(__FILE__) . '/../models/Customer.php');
 
 $errorsArray = array();
@@ -21,8 +21,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
 
     // ***************************************************************
-
-
     $password = $_POST['password'];
 
     $isValidatedCustomer = Customer::Validated($mail);
@@ -46,9 +44,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     } else {
         $errorsArray['global'] = 'Votre compte n\'est pas encore validé!';
     }
-    
 
 }
+
+
 
 $title='Adel\'Ongle - Connexion';
 // titre de page
@@ -60,6 +59,12 @@ $specificCss='/nav.css';
 
 include(dirname(__FILE__).'/../views/template/header.php');
 
+if(isset($_SESSION['customer'])){
+    
+        header('Location: indexCtrl.php');
+    
+    }else{
 include(dirname(__FILE__).'/../views/user/login.php');
+    }
 
 include(dirname(__FILE__).'/../views/template/footer.php');
