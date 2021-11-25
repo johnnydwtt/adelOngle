@@ -127,7 +127,7 @@ $password = trim(filter_input(INPUT_POST, 'password'));
             $toName = $lastname;
 
             $link = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/controllers/validAccountCtrl.php?id='.$id.'&token='.$token;
-            $message = "Bonjour à vous $firstname $lastname,<br>Merci! Veuillez confirmer en <a href=\"$link\">cliquant ici</a>";
+            $message = "Bonjour à vous $firstname $lastname,Merci! Veuillez confirmer en cliquant ici $link";
 
             $mail = new Mail($message,$to,$from,$subject,$fromName,$toName);
             $mail->send();

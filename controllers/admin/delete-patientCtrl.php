@@ -9,7 +9,8 @@ $customer_id = intval(trim(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_
 
 // Suppression du Client, et de tous ses rendez-vous. 
 // Une contrainte ON DELETE CASCADE, permet de supprimer tous les
-// enregistrements d'appointment également.  
+// enregistrements d'appointment également.
+
 $response = Customer::delete($customer_id);
 
 // Si $response appartient à la classe PDOException (Si une exception est retournée),

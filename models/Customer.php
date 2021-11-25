@@ -44,7 +44,7 @@ class Customer{
     public function create(){
         
         $sql = 'INSERT INTO `customer` (`firstname`, `lastname`, `mail`, `phone_number`, `adress`, `password`, `validated_token`,`role_id`)
-        VALUES (:firstname, :lastname, :mail, :phone_number, :adress, :password, :validated_token,2);';
+        VALUES (:firstname, :lastname, :mail, :phone_number, :adress, :password, :validated_token, 2);';
     
         try {
             if(!$this->isExist($this->_mail)){
@@ -270,7 +270,7 @@ class Customer{
      */
     public function update($customer_id){
         try{
-            // On récupère le patient
+            // On récupère le client
             $response = $this::get($customer_id);
             
             //Si la réponse est une erreur on sort via le catch
@@ -278,28 +278,53 @@ class Customer{
                 throw new PDOException($response->getMessage());
             }
 
-            // Si le mail n'existe pas en base ou que ça n'est pas déjà le mail du patient que l'on modifie
+            // Si le mail n'existe pas en base ou que ça n'est pas déjà le mail du client que l'on modifie
             // on a le droit de faire les modifs
             if(!$this->isExist($this->_mail) || $this->_mail==$response->mail){
-                $sql = 'UPDATE `customer` SET `firstname` = :firstname, `lastname` = :lastname, `mail` = :mail, `phone_number` = :phone_number, `adress` = :adress
+                $sql = 'UPDATE `customer` SET `lastname` = :lastname,  `firstname` = :firstname, `mail` = :mail, `phone_number` = :phone_number, `adress` = :adress
                         WHERE `customer_id` = :customer_id;';
 
                 $sth = $this->_pdo->prepare($sql);
-                $sth->bindValue(':firstname',$this->_firstname,PDO::PARAM_STR);
-                $sth->bindValue(':lastname',$this->_lastname,PDO::PARAM_STR);
-                $sth->bindValue(':mail',$this->_mail,PDO::PARAM_STR);
-                $sth->bindValue(':phone_number',$this->_phone_number,PDO::PARAM_STR);
-                $sth->bindValue(':adress',$this->_adress,PDO::PARAM_STR);
+                $sth->bindValue(':lastname',$this->_lastname);
+                $sth->bindValue(':firstname',$this->_firstname);
+                $sth->bindValue(':mail',$this->_mail);
+                $sth->bindValue(':phone_number',$this->_phone_number);
+                $sth->bindValue(':adress',$this->_adress);
                 $sth->bindValue(':customer_id',$customer_id,PDO::PARAM_INT);
                 $result = $sth->execute();
 
                 if($result === false){
                     throw new PDOException(ERR_UPDATE_CLIENT_NOTOK);
+                }else{
+                    return true;
                 }
                 
             } else {
                 throw new PDOException(ERR_CLIENTEXIST);
             }
+        } catch(PDOException $ex){
+            return $ex;
+        }
+    }
+
+
+    public function ChangePassword($customer_id){
+        try{
+
+                $sql = 'UPDATE `customer` SET `password` = :password
+                        WHERE `customer_id` = :customer_id;';
+
+                $sth = $this->_pdo->prepare($sql);
+                $sth->bindValue(':password',$this->_password);
+                $sth->bindValue(':customer_id',$customer_id,PDO::PARAM_INT);
+                $result = $sth->execute();
+
+                if($result === false){
+                    throw new PDOException(ERR_UPDATE_CLIENT_NOTOK);
+                }else{
+                    return true;
+                }
+
         } catch(PDOException $ex){
             return $ex;
         }
@@ -325,11 +350,12 @@ class Customer{
             if($sth === false){
                 throw new PDOException(ERR_PDO);
             } else {
-                if($sth->rowCount()==0)
+                if($sth->rowCount()==0){
                     throw new PDOException(ERR_DELETE_CLIENT_NOTOK);
-                else
+                }else{
                     throw new PDOException(MSG_DELETE_CLIENT_OK);
-            }
+                }
+         }
         }
         catch(PDOException $ex){
             return $ex;

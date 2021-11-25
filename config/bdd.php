@@ -17,12 +17,12 @@ define('ERR_UNKNOWN', 'Une erreur inconnue s\'est produite');
 define('ERR_DATABASE', 'Problème de connexion à la base de données');
 define('ERR_PDO', 'Une erreur SQL s\'est produite');
 
-define('MSG_CREATE_CLIENT_OK', 'Le client a bien été ajouté');
+define('MSG_CREATE_CLIENT_OK', 'Votre compte à bien été ajouté');
 define('ERR_CREATE_CLIENTT_NOTOK', 'Le client n\'a pas été enregistré en base de données');
-define('ERR_CLIENTEXIST', 'Le client existe déjà');
+define('ERR_CLIENTEXIST', 'Ce compte existe déjà');
 define('ERR_CLIENT_NOT_FOUND', 'Le client n\'a pas été trouvé');
-define('MSG_UPDATE_CLIENT_OK', 'Le client a bien été mis à jour');
-define('ERR_UPDATE_CLIENT_NOTOK', 'Le client n\'a pas été mis à jour');
+define('MSG_UPDATE_CLIENT_OK', 'Votre compte à bien été mis à jour');
+define('ERR_UPDATE_CLIENT_NOTOK', 'Votre compte n\'a pas été mis à jour');
 
 
 define('ERR_CREATE_APPOINTMENT_NOTOK', 'Le rdv n\'a pas été créé');

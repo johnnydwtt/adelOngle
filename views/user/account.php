@@ -3,27 +3,27 @@
         <div class="row justify-content-center text-center text-dark">
 
             <div class="card">
-                <div class="card-header fs-2"><?=htmlentities($_SESSION['customer']->firstname)?> <?=htmlentities($_SESSION['customer']->lastname)?>
+                <div class="card-header fs-2"><?=htmlentities($response->firstname)?> <?=htmlentities($response->lastname)?>
                 </div>
                 <div class="card-body">
                     <p class="card-text">
                     <span class="fw-bold">Email:</span> 
-                        <?=htmlentities($_SESSION['customer']->mail)?>
+                        <?=htmlentities($response->mail)?>
                     </p>
                     <p class="card-text">
                     <span class="fw-bold">Téléphone:</span> 
-                        <?=htmlentities($_SESSION['customer']->phone_number)?>
+                        <?=htmlentities($response->phone_number)?>
                     </p>
                     <p class="card-text"> 
                         <span class="fw-bold">Adresse:</span> 
-                        <?=htmlentities($_SESSION['customer']->adress)?> 
+                        <?=htmlentities($response->adress)?> 
                     </p>
                     <p class="card-text"> 
                         <span class="fw-bold">Mot de passe:</span> 
                         ************
                     </p>
                     
-                    <a href="/controllers/modifCtrl.php?id=<?=htmlentities($_SESSION['customer']->customer_id)?>">
+                    <a href="/controllers/modifCtrl.php?id=<?=htmlentities($response->customer_id)?>">
                     <button class="w-25 btn login_btn">Modifier</button>
                     </a>
             

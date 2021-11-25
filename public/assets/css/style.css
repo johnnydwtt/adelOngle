@@ -22,3 +22,6 @@ a{text-decoration:none}
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before{background-color:#c0392b!important}
 .eyeStyle{cursor:pointer;font-size:x-large;opacity:50%}
 .eyeStyle:hover{opacity:100%;font-size:23px;transition:all .2s}
+.lightblue{color: #6ba8bd;}
+.hover{color: black;}
+.hover:hover{color: #6ba8bd;}

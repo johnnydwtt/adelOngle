@@ -27,6 +27,8 @@ if($get_token == $valid_token){
     $message = 'Impossible de valider ce compte! <div class="fs-1">&#128683;</div>';
 }
 
+
+
 $title='Adel\'Ongle - Validation Compte';
 // titre de page
 $metaDesc='Validation de compte - Adel\'Ongle';

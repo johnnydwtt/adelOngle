@@ -7,6 +7,13 @@ require_once(dirname(__FILE__) . '/../models/Customer.php');
 $customer_id = intval(trim(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)));
 /*************************************************************/
 
+$response = Customer::get($customer_id);
+
+// Si $response appartient à la classe PDOException (Si une exception est retournée),
+// on stocke un message d'erreur à afficher dans la vue
+if($response instanceof PDOException){
+    $message = $response->getMessage();
+}
 
 $title='Adel\'Ongle - Mon Compte';
 // titre de page

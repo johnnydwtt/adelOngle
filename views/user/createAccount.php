@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-6 col-12">
             <p class="bg-light rounded shadow fs-4 mt-4">Informations personnelles</p>
-            <div class="col input-group mb-3">
+            <div class="input-group mb-3">
               <div class="input-group-append">
                 <span class="input-group-text">&#x1F464;</span>
               </div>
@@ -82,18 +82,19 @@
             <!-- PASSWORD VERIF INPUT -->
           </div>
 
-          <div class="form-group">
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="customControlInline" required>
-              <label class="custom-control-label" for="customControlInline">j'ai lu et j'accepte les conditions
-                générales d'utilisation</label>
-            </div>
-          </div>
-
 
           <div class="col-lg-6 col-8 mb-3 mt-3 login_container">
           <input type="submit" value="Inscription" class="btn login_btn">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox mt-3">
+              <label class="custom-control-label" for="customControlInline">En cliquant sur Inscription j'accepte <span class="fw-lighter text-decoration-underline lightblue">les conditions
+                générales d'utilisation</span>.</label>
+            </div>
           </div>
+
+          </div>
+          
+          
 
         </div>
       </div>

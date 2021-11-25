@@ -1,6 +1,6 @@
 <main>
     <section>
-        <form action="" method="post">
+        <form action="<?=htmlspecialChars($_SERVER['PHP_SELF'])?>?id=<?=htmlentities($_SESSION['customer']->customer_id)?>" method="post">
             <div class="container">
                 <div class="row justify-content-center flex-column align-items-center">
                     <h1>Nouveau mot de passe</h1>
@@ -47,7 +47,7 @@
                     <!-- PASSWORD VERIF INPUT -->
 
                     <div class="col-lg-10 col-8 mb-3 mt-3 login_container">
-                    <button type="button" name="button" class="btn login_btn">Enregistrer les modifications</button>
+                    <button type="submit" name="button" class="btn login_btn">Enregistrer les modifications</button>
                 </div>
                 </div>
 

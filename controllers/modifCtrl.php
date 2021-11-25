@@ -11,12 +11,15 @@ require_once(dirname(__FILE__).'/../utils/regex.php');
 
 require_once(dirname(__FILE__).'/../models/Customer.php');
 // appel de de ma class Customer
-
+require_once(dirname(__FILE__) . '/../class/Mail.php');
 /*************************************/
 
 // Initialisation du tableau d'erreurs
 $error = array();
 /*************************************/
+
+$customer_id = intval(trim(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)));
+
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -91,9 +94,12 @@ $phone_number = trim(filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING));
 // ***************************************************************
 // ***************************************************************
 
-    if(empty($error) ){    
-        $customer = new Customer($lastname,$firstname,$mail,$phone_number,$adress);
+    if(empty($error)){    
+
+        $customer = new Customer($lastname,$firstname,$adress,$mail,$phone_number);
+
         $response = $customer->update($customer_id);
+        
         // Si $response appartient à la classe PDOException (Si une exception est retournée),
         // on stocke un message d'erreur à afficher dans la vue
         if($response instanceof PDOException){
@@ -101,11 +107,19 @@ $phone_number = trim(filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING));
         } else {
             $message = MSG_UPDATE_CLIENT_OK;
         }
+        
     
-    
-}
 }
 
+}
+
+$response = Customer::get($customer_id);
+
+// Si $response appartient à la classe PDOException (Si une exception est retournée),
+// on stocke un message d'erreur à afficher dans la vue
+if($response instanceof PDOException){
+    $message = $response->getMessage();
+}
 
 $title='Adel\'Ongle - Modification du profil';
 // titre de page

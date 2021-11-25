@@ -18,7 +18,7 @@ if(!empty($email)){
 
 $title='Adel\'Ongle - mot de passe oublié';
 // titre de page
-$metaDesc='j\ai oublié mon mot de passe , vite je le change';
+$metaDesc='j\'ai oublié mon mot de passe , vite je le change';
 // meta description
 $specificCss='/nav.css';
 

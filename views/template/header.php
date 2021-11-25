@@ -43,7 +43,7 @@
                                 <a class="col-lg-3 dropdown-toggle col-12 fs-2" role="button" data-bs-toggle="dropdown" aria-expanded="true">&#128133;</a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="/controllers/admin/admin-panelCtrl.php">Admin</a>
-                                    <a class="dropdown-item" href="/controllers/accountCtrl.php">Profil</a>
+                                    <a class="dropdown-item" href="/controllers/accountCtrl.php?id=<?=$_SESSION['customer']->customer_id?>">Profil</a>
                                     <a class="dropdown-item" href="/controllers/disconnectCtrl.php">Déconnexion</a>
                                 </div>
 
@@ -53,7 +53,7 @@
                         
                                 <a class="col-lg-3 dropdown-toggle col-12 fs-2" role="button" data-bs-toggle="dropdown" aria-expanded="true">&#128133;</a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="/controllers/accountCtrl.php?id=<?=$response->customer_id?>">Profil</a>
+                                    <a class="dropdown-item" href="/controllers/accountCtrl.php?id=<?=$_SESSION['customer']->customer_id?>">Profil</a>
                                     <a class="dropdown-item" href="/controllers/disconnectCtrl.php">Déconnexion</a>
                                 </div>
                             <?php } ?> 
