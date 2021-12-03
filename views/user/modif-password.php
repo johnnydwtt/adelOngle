@@ -5,6 +5,7 @@
                 <div class="row justify-content-center flex-column align-items-center">
                     <h1>Nouveau mot de passe</h1>
                     <p class="bg-light rounded shadow fs-4 mt-4">Changement de mot de passe</p>
+                        <div class="fw-lighter"><?=$message ?? '';?></div>
                     <div class="col-lg-12">
                     <div class="input-group mb-2">
                         <div class="input-group-append">
@@ -15,7 +16,7 @@
                             class="eyeStyle">&#x1F441;</span>
 
                     </div>
-                    <p class="text-danger"><?=$error['password'] ?? NULL?></p>
+                    <p class="text-danger"><?=$error['password'] ?? NULL;?></p>
                     </div>
                     
                     <!-- PASSWORD INPUT -->
@@ -28,7 +29,7 @@
                             placeholder="Nouveau mot de passe" required><span
                             id="toggle-verifPass" class="eyeStyle">&#x1F441;</span>
                     </div>
-                    <p class="text-danger"><?=$error['confirmPass'] ?? NULL?></p>
+                    <p class="text-danger"><?=$error['confirmPass'] ?? NULL;?></p>
                     </div>
                     <!-- PASSWORD VERIF INPUT -->
 
@@ -42,7 +43,7 @@
                             placeholder="Confirmation du mot de passe" required><span
                             id="toggle-verifPass" class="eyeStyle">&#x1F441;</span>
                     </div>
-                    <p class="text-danger"><?=$error['confirmPass'] ?? NULL?></p>
+                    <p class="text-danger"><?=$error['confirmPass'] ?? NULL;?></p>
                     </div>
                     <!-- PASSWORD VERIF INPUT -->
 

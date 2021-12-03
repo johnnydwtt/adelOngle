@@ -9,34 +9,37 @@ require_once(dirname(__FILE__).'/../../utils/init.php');
 
 // Initialisation du tableau d'erreurs
 $errorsArray = array();
+$error = array();
 /*************************************/
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-    $date = trim(filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
-    $time = trim(filter_input(INPUT_POST, 'time', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
-
+    $date = trim(filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING));
+    $time = trim(filter_input(INPUT_POST, 'time', FILTER_SANITIZE_STRING));
+    
     $datetime = $date . ' ' . $time;
+
 
 
     if(!empty($date)){
         
         if (!preg_match('/'. REGEXP_DATE .'/',$date)){
-            $error['dateH'] = 'Saisir une date et une heure valide!';
+            $error['date'] = 'Saisir une date!';
         }
     } else { 
-        $error['dateH'] = 'Ce champ est requis!';
+        $error['date'] = 'Ce champ est requis!';
     }
     // ************************************
     // ************************************
     if(!empty($time)){
 
         if (!preg_match('/'. REGEXP_HOUR .'/',$time)){
-            $error['time'] = 'Saisir un titre valide!';
+            $error['time'] = 'Saisir une date valide!';
         }
     } else { 
         $error['time'] = 'Ce champ est requis!';
     }
+
 
     if(empty($errorsArray)){
         $pdo = Database::getInstance();
@@ -45,14 +48,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $response = $time_slot->create();
 
         if(!$response){
-            $message = 'Problème d\'enregistrement 	&#10060;';
+            $message = 'Problème d\'enregistrement';
         } else {
-            $message = 'Rendez-vous bien enregister &#9989;';
+            $message = 'Rendez-vous bien enregister';
         }
 
     }
+    
 }
-
 // *****************************
 $title='Adel\'Ongle - Panel rendez-vous';
 // meta description

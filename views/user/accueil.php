@@ -28,7 +28,10 @@
     <section>
         <div class="container mt-4">
             <div class="row text-center">
-                <div id="prestation" class="col">PRESTATION PRIX</div>
+                <h2 id="prestation" class="col">PRESTATION PRIX</h2>
+                <div class="row justify-content-center align-items-center">
+                    <img class="photoSize" src="/public/assets/img/prestationImage.png" alt="affiche des tarification et des prestations d'AdelOngle">
+                </div>
             </div>
         </div>
     </section>
@@ -38,7 +41,7 @@
     <section>
         <div class="container mt-4 mb-4">
             <div class="row text-center mb-3">
-                <div id="photo" class="col">PHOTOS</div>
+                <h2 id="photo" class="col">PHOTOS</h2>
             </div>
             <div class="row justify-content-center text-center">
                 <div class="col-12 col-lg-4 col-md-4">

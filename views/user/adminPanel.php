@@ -1,7 +1,7 @@
 <main>
     <section>
-    <form action="" method="post">
-    <div class="text-center my-3 fs-4"><?=htmlentities($message ?? '')?></div>
+    <form action="<?=htmlspecialChars($_SERVER['PHP_SELF'])?>" method="post">
+    <div class="text-center my-3 fs-4 text-access"><?=htmlentities($message ?? '')?>&#10004;</div>
         <div class="container bg-light shadow">
             <h1 class="mb-4">Ajouter un rendez-vous</h1>
             <div class="row justify-content-center">
@@ -38,8 +38,11 @@
             <hr>
             <div class="row justify-content-center">
                 <div class="col-3 my-3">
-                    <a href="/controllers/admin/listCustomerCtrl.php"><button class="btn login_btn">Ma liste de patient</button></a>
+                    <a href="/controllers/admin/listCustomerCtrl.php"><button class="btn login_btn">Gestion Client</button></a>
                 </div>
+                <div class="col-3 my-3">
+                    <a href="/controllers/admin/listTimeSlotCtrl.php"><button class="btn login_btn">Gestion Créneaux</button></a>
+                </div> 
             </div>
         </div>
     </section>

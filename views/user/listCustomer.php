@@ -22,32 +22,60 @@
         Il y a <span class="fw-bold"><?=$nbCustomers?> Clients</span> chez AdelOngle
 </p>
 
-<table class="table">
+        <table class="table">
 
-    <tbody>
+            <tbody>
 
-        <?php 
-    $i=0;
-    foreach($response as $customers) {
-        $i++;
-        ?>
-        <tr class="d-flex text-center flex-column flex-lg-row justify-content-center align-items-center my-3">
-            <th><?=$customers->customer_id?></th>
-            <td><?=htmlentities($customers->firstname)?></td>
-            <td><?=htmlentities($customers->lastname)?></td>
-            <td><?=htmlentities($customers->mail)?></td>
-            <td><?=htmlentities($customers->adress)?></td>
-            <td><a href="mailto:<?=htmlentities($customers->mail)?>"><?=htmlentities($customers->mail)?></a></td>
-            <td><a href="tel:<?=htmlentities($customers->phone_number)?>"><?=htmlentities($customers->phone_number)?></a></td>
-            <td>
-                <a href="/controllers/admin/modifAdminCtrl.php?id=<?=htmlentities($customers->customer_id)?>"><img src="https://img.icons8.com/stickers/42/000000/multi-edit.png"/></a>
-                <a href="/controllers/admin/delete-patientCtrl.php?id=<?=htmlentities($customers->customer_id)?>"><img src="https://img.icons8.com/stickers/42/000000/delete-forever.png"/></a>
-            </td>
-        </tr>
-        <?php } ?>
+                <?php 
+            $i=0;
+            foreach($response as $customers) {
+                $i++;
+                ?>
+                <tr class="d-flex text-center flex-column flex-lg-row justify-content-center align-items-center my-3 shadow">
+                    <th><?=$customers->customer_id?></th>
+                    <td><?=htmlentities($customers->firstname)?></td>
+                    <td><?=htmlentities($customers->lastname)?></td>
+                    <td><?=htmlentities($customers->mail)?></td>
+                    <td><?=htmlentities($customers->adress)?></td>
+                    <td><a href="mailto:<?=htmlentities($customers->mail)?>"><?=htmlentities($customers->mail)?></a></td>
+                    <td><a href="tel:<?=htmlentities($customers->phone_number)?>"><?=htmlentities($customers->phone_number)?></a></td>
+                    <td>
+                        <a href="/controllers/admin/modifAdminCtrl.php?id=<?=htmlentities($customers->customer_id)?>"><img src="https://img.icons8.com/stickers/42/000000/multi-edit.png" alt="icon de bloc note pour modifié" /></a>
+                        </td>
+                    <td>
+                    <img alt="icon de croix pour supprimé" data-id="<?=htmlentities($customers->customer_id)?>" role="button" data-bs-toggle="modal" data-bs-target="#modalDelete" src="https://img.icons8.com/stickers/42/000000/delete-forever.png"/>
+                    </td>
+                </tr>
+                <?php } ?>
 
-    </tbody>
-</table>
+            </tbody>
+
+        </table>
+
+                <!-- Modal -->
+                <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteName" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="title">Supprimer</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                                Êtes vous sûrs de vouloir supprimer?
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn w-25 btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                <button type="button" id="confirm" class="btn w-25 login_btn">Oui sûrs</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
 <nav aria-label="...">
     <ul class="pagination pagination-lg">
         

@@ -18,7 +18,7 @@ require_once(dirname(__FILE__) . '/../class/Mail.php');
 $error = array();
 /*************************************/
 
-$customer_id = intval(trim(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT)));
+$customer_id = intval($_SESSION['customer']->customer_id);
 
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -127,8 +127,12 @@ $metaDesc='Je modifie mon profil - Adel\'Ongle';
 // meta description
 $specificCss='/nav.css';
 
-include(dirname(__FILE__) . '/../views/template/header.php');
+if(isset($_SESSION['customer'])){
+    
+    include(dirname(__FILE__) . '/../views/template/header.php');
+    include(dirname(__FILE__) . '/../views/user/modif.php');
+    include(dirname(__FILE__) . '/../views/template/footer.php');
+}else{
+    header('location: /controllers/indexCtrl.php');
+}
 
-include(dirname(__FILE__) . '/../views/user/modif.php');
-
-include(dirname(__FILE__) . '/../views/template/footer.php');

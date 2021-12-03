@@ -153,6 +153,25 @@ class Customer{
         }
     }
 
+    public static function setArchived($customer_id){
+        $sql = 'UPDATE `customer` SET `archived_at`= CURRENT_TIMESTAMP()
+                WHERE `customer_id` = :customer_id';
+        
+        try {
+            $pdo = Database::getInstance();
+            $sth = $pdo->prepare($sql);
+            $sth->bindValue(':customer_id', $customer_id, PDO::PARAM_INT);
+
+            if(!$sth->execute()){
+                throw new PDOException('Problème de validation du compte');
+            } else {
+                return true;
+            }
+        } catch (\PDOException $ex) {
+            return $ex;
+        }
+    }
+
     public static function getByEmail($mail){
         $sql = 'SELECT * FROM `customer` WHERE `mail` = :mail;';
 
@@ -308,14 +327,15 @@ class Customer{
     }
 
 
-    public function ChangePassword($customer_id){
+    public static function ChangePassword($customer_id,$passwordHash){
         try{
 
                 $sql = 'UPDATE `customer` SET `password` = :password
                         WHERE `customer_id` = :customer_id;';
 
-                $sth = $this->_pdo->prepare($sql);
-                $sth->bindValue(':password',$this->_password);
+                $pdo = Database::getInstance();
+                $sth = $pdo->prepare($sql);
+                $sth->bindValue(':password',$passwordHash);
                 $sth->bindValue(':customer_id',$customer_id,PDO::PARAM_INT);
                 $result = $sth->execute();
 

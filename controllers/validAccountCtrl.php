@@ -35,8 +35,13 @@ $metaDesc='Validation de compte - Adel\'Ongle';
 // meta description
 $specificCss='/nav.css';
 
+if(isset($_SESSION['customer'])){
+
 include(dirname(__FILE__) . '/../views/template/header.php');
 
 include(dirname(__FILE__) . '/../views/user/validAccount.php');
 
 include(dirname(__FILE__) . '/../views/template/footer.php');
+}else{
+    header('location: /controllers/indexCtrl.php');
+}

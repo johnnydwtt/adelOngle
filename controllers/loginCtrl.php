@@ -2,6 +2,8 @@
 require_once(dirname(__FILE__) . '/../utils/init.php');
 require_once(dirname(__FILE__).'/../utils/connect.php');
 require_once(dirname(__FILE__) . '/../models/Customer.php');
+require_once(dirname(__FILE__) . '/../utils/regex.php');
+
 
 $errorsArray = array();
 
@@ -23,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     // ***************************************************************
     $password = $_POST['password'];
 
-    $isValidatedCustomer = Customer::Validated($mail);
+    $isValidatedCustomer  = Customer::Validated($mail);
 
     if(!is_null($isValidatedCustomer)){
         $customer = Customer::getByEmail($mail);
@@ -57,14 +59,18 @@ $specificCss='/nav.css';
 
 
 
-include(dirname(__FILE__).'/../views/template/header.php');
+
 
 if(isset($_SESSION['customer'])){
-    
-        header('Location: indexCtrl.php');
-    
+
+    header('Location: indexCtrl.php');
+
     }else{
-include(dirname(__FILE__).'/../views/user/login.php');
+
+    include(dirname(__FILE__).'/../views/template/header.php');
+    include(dirname(__FILE__).'/../views/user/login.php');
+    include(dirname(__FILE__).'/../views/template/footer.php');
+
     }
 
-include(dirname(__FILE__).'/../views/template/footer.php');
+

@@ -1,10 +1,14 @@
 <div class="container-fluid shadow-lg mt-4">
   <footer class="d-flex justify-content-center align-items-center py-3 border-top">
-    <div class="col-md-4 col-6 d-flex justify-content-center align-items-center">
+    <div class="col-md-3 col-4 d-flex justify-content-center align-items-center">
     <a href="/controllers/mentionslegalCtrl.php"><span class="text-muted bgStyle">Mentions légales</span></a>
     </div>
-    <div class="col-md-4 col-6 d-flex justify-content-center align-items-center">
-        <span class="text-muted">© 2021 Adel'Ongles</span>
+    <div class="col-md-3 col-4 d-flex justify-content-center align-items-center">
+    <a href="https://www.instagram.com/adelongle/" target="_blank"><img class="logoSize" src="/public/assets/img/instagramLogo.png" alt="logo de instagram relier en lien vers la page adelongle"></a>
+    <a href="https://www.facebook.com/AdelOngle-573713452983808/" target="_blank"><img class="logoSize" src="/public/assets/img/facebookLogo.png" alt="logo de facebook relier en lien vers la page adelongle"></a>
+    </div>
+    <div class="col-md-3 col-4 d-flex justify-content-center align-items-center">
+        <span class="text-muted">© 2021 Adel'Ongle</span>
     </div>
   </footer>
 </div>

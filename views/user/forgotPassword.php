@@ -1,6 +1,6 @@
 <main>
     <section>
-    <form action="" method="post">
+    <form action="<?=htmlspecialChars($_SERVER['PHP_SELF'])?>" method="post">
         <div class="container bg-light rounded shadow">
             <div class="row justify-content-center">
                 <div class="col-lg-12 col-12"">

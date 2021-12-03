@@ -23,7 +23,7 @@
                         ************
                     </p>
                     
-                    <a href="/controllers/modifCtrl.php?id=<?=htmlentities($response->customer_id)?>">
+                    <a href="/controllers/modifCtrl.php">
                     <button class="w-25 btn login_btn">Modifier</button>
                     </a>
             

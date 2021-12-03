@@ -77,6 +77,7 @@ $password = trim(filter_input(INPUT_POST, 'password'));
 // ***************************************************************
 
     // CONDITIONS NUMERO DE TELEPHONE
+    
     $mail = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
 
     //On verifie que ce n'est pas vide
@@ -115,6 +116,8 @@ $password = trim(filter_input(INPUT_POST, 'password'));
         $id = $pdo->lastInsertId();
         $token = $customer->ValidatedToken();
 
+        $messageOk = OK_EMAIL;
+    }else{
         $messageError = ERR_EMAIL_EXIST;
     }
 
@@ -127,7 +130,7 @@ $password = trim(filter_input(INPUT_POST, 'password'));
             $toName = $lastname;
 
             $link = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/controllers/validAccountCtrl.php?id='.$id.'&token='.$token;
-            $message = "Bonjour à vous $firstname $lastname,Merci! Veuillez confirmer en cliquant ici $link";
+            $message = "Bonjour à vous $firstname $lastname, Adel'Ongle vous remercie de votre inscription! Veuillez confirmer votre inscription en cliquant sur le lien suivant : $link";
 
             $mail = new Mail($message,$to,$from,$subject,$fromName,$toName);
             $mail->send();
@@ -136,7 +139,6 @@ $password = trim(filter_input(INPUT_POST, 'password'));
         }
 
 // CONDITIONS MOT DE PASSE
-
 // PASSWORD HASHAGE password_hash($_GET['password'], PASSWORD_DEFAULT);
 
 

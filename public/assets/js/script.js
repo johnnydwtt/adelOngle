@@ -1,4 +1,7 @@
-// NAVBAR +++
+
+// ****************************
+// ********* DEBUT NAVBAR *****
+// ****************************
 $('.navTrigger').click(function () {
     $(this).toggleClass('active');
     console.log("Clicked menu");
@@ -16,44 +19,29 @@ $(window).scroll(function() {
 });
 
 
-//FIN NAVBAR +++
-window.addEventListener('DOMContentLoaded',function() {
-  var calendarEl = document.getElementById('calendar');
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
-    locale: 'fr',
-    events: [{
-      title:'test',
-      start:'2021-11-01'
-    }
-    ]
-  });
-  calendar.render();
-});
+// ****************************
+// ********* FIN NAVBAR *******
+// ****************************
+
+// ****************************
+// **** MODAL CONFIRMATION ****
+// ****************************
+
+var customer_id;
+var myModalEl = document.getElementById('modalDelete');
+var confirmation = document.getElementById('confirm')
 
 
-let password = document.getElementById('verif');
-let togglePassword = document.getElementById('toggle-password');
 
-togglePassword.addEventListener("click", toggleClicked);
+myModalEl.addEventListener('show.bs.modal', function (event) {
+    customer_id = event.relatedTarget.dataset.id;
+    console.log(myModalEl);
+})
 
-function toggleClicked() {
-  if (password.type == "password") {
-    password.type = "text";
-  } else {
-    password.type = "password";
-  }
-};
 
-let passwordVerif = document.getElementById('verifPass');
-let togglePasswordVerif = document.getElementById('toggle-verifPass');
+confirmation.addEventListener('click', function (){
+    document.location.href = '/controllers/admin/delete-patientCtrl.php?id='+customer_id;
+    console.log(confirmation);
+})
 
-togglePasswordVerif.addEventListener("click", toggleClickedverif);
 
-function toggleClickedverif() {
-  if (passwordVerif.type == "password") {
-    passwordVerif.type = "text";
-  } else {
-    passwordVerif.type = "password";
-  }
-};

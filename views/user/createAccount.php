@@ -49,6 +49,7 @@
 
           <div class="col-lg-6 col-12">
             <p class="bg-light rounded shadow fs-4 mt-4">Informations de connexion</p>
+            <div class="text-access fw-bold my-2"><?=htmlentities($messageOk ?? '')?></div>
             <div class="text-danger fw-bold my-2"><?=htmlentities($messageError ?? '')?></div>
             <div class="col input-group mb-3">
               <div class="input-group-append">
